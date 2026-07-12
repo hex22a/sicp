@@ -1,25 +1,25 @@
 (define (square x) (* x x))
 
-(define (sqrt-iter guess x old-guess) 
+(define (qbrt-iter guess x old-guess) 
   (if (good-enough? guess old-guess)
     guess
-    (sqrt-iter (improve guess x)
+    (qbrt-iter (improve guess x)
                x
                guess)))
 
 (define (improve guess x)
-  (average guess (/ x guess)))
-
-(define (average x y)
-  (/ (+ x y) 2))
+  (/ (+ (/ x
+           (square guess))
+        (* 2 guess))
+     3))
 
 (define (good-enough? guess old-guess)
   (< 
     ( / (abs (- guess old-guess))
         guess)
-     0.001))
+     0.0000001))
 
-(define (my-sqrt x)
-  (sqrt-iter 1.0 x 0))
+(define (qbrt x)
+  (qbrt-iter 1.0 x 0))
 
-(my-sqrt 9)
+(qbrt 27)
