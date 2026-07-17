@@ -8,3 +8,6 @@
     (p (sine (/ angle 3.0)))))
 
 (sine 12.15)
+
+; p called 5 times
+; O(n) ~ log(n)
