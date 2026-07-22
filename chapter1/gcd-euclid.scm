@@ -3,4 +3,4 @@
     a
     (gcde b (remainder a b))))
 
-(gcde 21 18)
+(gcde 206 40)
