@@ -4,7 +4,12 @@
 (define (find-divisor n test-divisor)
   (cond ((> (square test-divisor) n) n)
         ((divides? test-divisor n) test-divisor)
-        (else (find-divisor n (+ test-divisor 1)))))
+        (else (find-divisor n (next test-divisor)))))
+
+(define (next n)
+  (if (= n 2)
+    3
+    (+ n 2)))
 
 (define (divides? a b)
   (= (remainder b a) 0))
@@ -27,26 +32,6 @@
   (display elapsed-time)
   #t)
 
-(define (search-for-primes-odd p n)
-  (cond ((= n 0) (newline))
-        ((timed-prime-test p) (search-for-primes-odd (+ p 2) (- n 1)))
-        (else (search-for-primes-odd (+ p 2) n))))
-
-(define (search-for-primes p)
-  (if (divides? 2 p)
-    (search-for-primes-odd (+ p 1) 3)
-    (search-for-primes-odd p 3)))
-
-(search-for-primes 1000)
-(search-for-primes 10000)
-(search-for-primes 100000)
-(search-for-primes 10000000)
-(search-for-primes 1000000000)
-(search-for-primes 100000000000)
-(search-for-primes 1000000000000)
-(search-for-primes 10000000000000)
-
-;; For 1.23
 (timed-prime-test 1000000009)
 (timed-prime-test 1000000021)
 (timed-prime-test 10000000019)
@@ -59,3 +44,7 @@
 (timed-prime-test 1000000000061)
 (timed-prime-test 1000000000063)
 
+; as of 2026 the improvement is between ~1.5x to 3x.
+; bigger numbers perfrom better because we save more checks in a long run
+; smaller numbers are below the 2x expectation because we added an extra call
+; that on it's own is the overhead
