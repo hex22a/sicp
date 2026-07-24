@@ -10,4 +10,4 @@
 (define (inc i) (+ 1 i))
 (define (identity x) x)
 
-(sum cube 1 inc 10)
+(sum cube 1 inc 3)
